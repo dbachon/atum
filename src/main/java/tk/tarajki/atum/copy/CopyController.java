@@ -2,7 +2,6 @@ package tk.tarajki.atum.copy;
 
 
 import org.springframework.web.bind.annotation.*;
-import tk.tarajki.atum.book.*;
 
 import java.util.List;
 
@@ -20,6 +19,21 @@ public class CopyController {
     @GetMapping
     public List<CopyDto> findCopies(@ModelAttribute CopyFilter copyFilter){
         return copyService.findCopies(copyFilter);
+    }
+
+    @GetMapping("/title")
+    public List<CopyDto> findCopiesByTitle(@ModelAttribute CopyFilter copyFilter) {
+        return copyService.findCopiesByTitle(copyFilter);
+    }
+
+    @GetMapping("/all")
+    public List<CopyDto> findAllCopies(@ModelAttribute CopyFilter copyFilter) {
+        return copyService.findAllCopies(copyFilter);
+    }
+
+    @PatchMapping
+    public void changeCopySettings(@RequestBody CopySettingsRequest copySettingsRequest) {
+        copyService.changeCopySettings(copySettingsRequest);
     }
 
 

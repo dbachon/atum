@@ -1,13 +1,13 @@
 package tk.tarajki.atum.copy;
 
-import tk.tarajki.atum.book.BookCopyDto;
+import tk.tarajki.atum.book.BookDto;
 import tk.tarajki.atum.utils.enums.Availability;
 
 public class CopyDto {
     private Long id;
     private String code;
     private Availability availability;
-    private BookCopyDto book;
+    private BookDto book;
 
     public CopyDto() {
     }
@@ -17,7 +17,7 @@ public class CopyDto {
         this.id = copy.getId();
         this.code = copy.getCode();
         this.availability = copy.getAvailability();
-        this.book = new BookCopyDto(copy.getBook());
+        this.book = new BookDto(copy.getBook());
     }
 
     public String getCode() {
@@ -44,11 +44,11 @@ public class CopyDto {
         this.id = id;
     }
 
-    public BookCopyDto getBook() {
+    public BookDto getBook() {
         return book;
     }
 
-    public void setBook(BookCopyDto book) {
+    public void setBook(BookDto book) {
         this.book = book;
     }
 }

@@ -43,7 +43,7 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("Atum")
                 .version("Alpha")
-                .description("todo")
+                .description("")
                 .build();
     }
 

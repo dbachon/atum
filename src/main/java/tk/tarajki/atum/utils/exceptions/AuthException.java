@@ -1,4 +1,4 @@
-package tk.tarajki.atum.utils.expeptions;
+package tk.tarajki.atum.utils.exceptions;
 
 
 import org.springframework.http.HttpStatus;

@@ -4,7 +4,6 @@ package tk.tarajki.atum.borrowing;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import tk.tarajki.atum.auth.UserPrincipal;
-import tk.tarajki.atum.user.UserDto;
 
 import java.util.List;
 
@@ -19,8 +18,14 @@ public class BorrowingController {
     }
 
     @GetMapping
-    public List<BorrowingDto> findMyBorrowings(@AuthenticationPrincipal UserPrincipal userPrincipal){
-        return  borrowingService.getBorrowingsByUser(userPrincipal.getUser());
+    public List<BorrowingDto> findMyBorrowings(@AuthenticationPrincipal UserPrincipal userPrincipal, @ModelAttribute BorrowingFilter borrowingFilter) {
+
+        return borrowingService.getBorrowingsByUser(userPrincipal.getUser(), borrowingFilter);
+    }
+
+    @GetMapping("/all")
+    public List<BorrowingDto> findBorrowings(@ModelAttribute BorrowingFilter borrowingFilter) {
+        return borrowingService.findBorrowings(borrowingFilter);
     }
 
     @PostMapping
@@ -28,10 +33,16 @@ public class BorrowingController {
         borrowingService.addBorrowing(userPrincipal.getUser(), borrowingAddRequest);
     }
 
-    @DeleteMapping
-    public void returnBorrowing(@RequestBody BorrowingReturnRequest borrowingReturnRequest){
+
+    @PatchMapping
+    public void returnBorrowing(@RequestBody BorrowingReturnRequest borrowingReturnRequest) {
         borrowingService.returnBorrowing(borrowingReturnRequest);
-}
+    }
+
+    @PostMapping("/settings")
+    public void acceptReturnBorrowing(@RequestBody BorrowingAcceptRequest borrowingAcceptRequest) {
+        borrowingService.acceptReturnBorrowing(borrowingAcceptRequest);
+    }
 
 
 

@@ -3,9 +3,8 @@ package tk.tarajki.atum.author;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.stream.Collectors;
-
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AuthorService {
@@ -32,6 +31,13 @@ public class AuthorService {
         );
         authorRepository.save(author);
         return new AuthorInfoDto(authorAddRequest);
+    }
+
+    @Transactional
+    public void changeAuthorSettings(AuthorSettingRequest authorSettingRequest) {
+        Author author = authorRepository.findByIdRequired(authorSettingRequest.getId());
+        author.setFirstName(authorSettingRequest.getFirstName());
+        author.setLastName(authorSettingRequest.getLastName());
     }
 }
 

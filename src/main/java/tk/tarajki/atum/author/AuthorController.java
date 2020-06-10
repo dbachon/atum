@@ -19,15 +19,15 @@ public class AuthorController {
     public List<AuthorDto> findAuthors(@ModelAttribute AuthorFilter authorFilter){
             return authorService.findAuthors(authorFilter);
     }
-/*
-    @GetMapping
-    public List<BookDto> findBooksAuthors(@ModelAttribute AuthorFilter authorFilter){
-        return authorService.findBooksAuthors(authorFilter);
-    }
-*/
+
     @PostMapping
     public AuthorInfoDto add(@RequestBody AuthorAddRequest authorAddRequest) {
         return authorService.add(authorAddRequest);
+    }
+
+    @PatchMapping
+    public void changeAuthorSettings(@RequestBody AuthorSettingRequest authorSettingRequest) {
+        authorService.changeAuthorSettings(authorSettingRequest);
     }
 
 }

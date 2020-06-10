@@ -1,7 +1,8 @@
 package tk.tarajki.atum.user;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import tk.tarajki.atum.auth.UserPrincipal;
 
 import java.util.List;
 
@@ -20,22 +21,16 @@ public class UserController {
         return userService.findUsers(userFilter);
     }
 
-
-    @DeleteMapping
-    public void banUser(@RequestBody UserBanRequest userBanRequest) {
-       userService.banUser(userBanRequest);
+    @GetMapping("/my")
+    public UserDto findUser(@AuthenticationPrincipal UserPrincipal userPrincipal) {
+        return userService.findUser(userPrincipal);
     }
 
-    @PutMapping
-    public void unBanUser(@RequestBody UserBanRequest userBanRequest) {
-        userService.unBanUser(userBanRequest);
-    }
 
     @PatchMapping
-    public void changeRoleUser(@RequestBody UserChangeRoleRequest userChangeRoleRequest) {
-        userService.changeRoleUser(userChangeRoleRequest);
+    public void changeUserSettings(@RequestBody UserChangeSettingsRequest userChangeSettingsRequest) {
+        userService.changeUserSettings(userChangeSettingsRequest);
     }
-
 
 
 }

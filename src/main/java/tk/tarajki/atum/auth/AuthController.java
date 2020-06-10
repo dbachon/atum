@@ -1,8 +1,9 @@
 package tk.tarajki.atum.auth;
 
-import io.swagger.annotations.Api;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
@@ -17,20 +18,13 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public UserInfoDto login(@RequestBody @Valid LoginRequest loginRequest) {
+    public AuthResponse login(@RequestBody @Valid LoginRequest loginRequest) {
         return authService.login(loginRequest);
     }
 
 
     @PostMapping("/register")
-    public UserInfoDto register(@RequestBody @Valid RegisterRequest registerRequest) {
+    public AuthResponse register(@RequestBody @Valid RegisterRequest registerRequest) {
         return authService.register(registerRequest);
     }
-
-/* <REMEMBER>
-    @GetMapping
-    public String getEmail(@AuthenticationPrincipal UserPrincipal userPrincipal) {
-        return userPrincipal.getUser().getEmail();
-    }
-*/
 }

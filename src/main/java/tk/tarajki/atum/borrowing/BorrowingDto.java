@@ -1,16 +1,14 @@
 package tk.tarajki.atum.borrowing;
 
-import tk.tarajki.atum.copy.Copy;
 import tk.tarajki.atum.copy.CopyDto;
-import tk.tarajki.atum.user.User;
 import tk.tarajki.atum.utils.enums.Status;
 
-import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class BorrowingDto {
+    private String email;
     private Long id;
     private Date date;
     private Date returnedDate;
@@ -21,6 +19,7 @@ public class BorrowingDto {
     }
 
     public BorrowingDto(Borrowing borrowing) {
+        this.email = borrowing.getUser().getEmail();
         this.id = borrowing.getId();
         this.date = borrowing.getDate();
         this.returnedDate = borrowing.getReturnedDate();
@@ -67,5 +66,13 @@ public class BorrowingDto {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

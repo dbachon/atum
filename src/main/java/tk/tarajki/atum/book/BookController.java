@@ -1,12 +1,8 @@
 package tk.tarajki.atum.book;
 
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.*;
-import tk.tarajki.atum.auth.UserPrincipal;
 
-import javax.annotation.security.RolesAllowed;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -22,9 +18,7 @@ public class BookController {
 
 
     @GetMapping
-    public List<BookDto> findBooks(@AuthenticationPrincipal UserPrincipal userPrincipal, @ModelAttribute BookFilter bookFilter){
-
-            System.out.println(userPrincipal.getAuthorities());
+    public List<BookDto> findBooks(@ModelAttribute BookFilter bookFilter) {
         return bookService.findBooks(bookFilter);
 
     }
@@ -32,6 +26,11 @@ public class BookController {
     @PostMapping
     public BookInfoDto add(@RequestBody BookAddRequest bookAddRequest) {
         return bookService.add(bookAddRequest);
+    }
+
+    @PatchMapping
+    public void changeBookSettings(@RequestBody BookSettingsRequest bookSettingsRequest) {
+        bookService.changeBookSettings(bookSettingsRequest);
     }
 
 

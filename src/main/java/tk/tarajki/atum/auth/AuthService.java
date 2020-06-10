@@ -23,7 +23,7 @@ public class AuthService {
         this.tokenProvider = tokenProvider;
     }
 
-    public UserInfoDto login(LoginRequest loginRequest) {
+    public AuthResponse login(LoginRequest loginRequest) {
         UserPrincipal p = (UserPrincipal) authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()))
                 .getPrincipal();
@@ -31,22 +31,31 @@ public class AuthService {
     }
 
 
-    private UserInfoDto createAuthResponse(User user) {
-        return new UserInfoDto(user.getEmail(), tokenProvider.createToken(user.getEmail()));
+    private AuthResponse createAuthResponse(User user) {
+        return new AuthResponse(user.getEmail(), tokenProvider.createToken(user.getEmail()), user.getRole());
     }
 
     @Transactional
-    public UserInfoDto register(RegisterRequest registerRequest) {
+    public AuthResponse register(RegisterRequest registerRequest) {
         if (userRepository.existsByEmail(registerRequest.getEmail())) {
             throw new RuntimeException("User already exists");
     }
+        Role role;
+        if (!userRepository.existsById((long) 1)) {
+            role = Role.ADMIN;
+        } else {
+            role = Role.READER;
+        }
+
+
         User user = new User(
                 registerRequest.getFirstName(),
                 registerRequest.getLastName(),
                 registerRequest.getEmail(),
-                Role.ADMIN,
+                role,
                 passwordEncoder.encode(registerRequest.getPassword())
         );
+
         return createAuthResponse(userRepository.save(user));
 
     }

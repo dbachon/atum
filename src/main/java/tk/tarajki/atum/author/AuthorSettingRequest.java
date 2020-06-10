@@ -1,15 +1,9 @@
 package tk.tarajki.atum.author;
 
-public class AuthorBookDto {
+public class AuthorSettingRequest {
     private Long id;
     private String firstName;
     private String lastName;
-
-    public AuthorBookDto(Author author) {
-        this.id = author.getId();
-        this.firstName = author.getFirstName();
-        this.lastName = author.getLastName();
-    }
 
     public String getFirstName() {
         return firstName;

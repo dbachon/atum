@@ -20,6 +20,7 @@ public class User extends BaseEntity<Long> {
     private String password;
 
     @OneToMany(fetch = FetchType.LAZY)
+
     @JoinColumn(name = "user_id")
     private List<Borrowing> borrowings;
 

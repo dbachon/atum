@@ -5,7 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import tk.tarajki.atum.utils.expeptions.AuthException;
+import tk.tarajki.atum.utils.exceptions.AuthException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;

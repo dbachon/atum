@@ -2,7 +2,7 @@ package tk.tarajki.atum.user;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tk.tarajki.atum.utils.enums.UserStatus;
+import tk.tarajki.atum.auth.UserPrincipal;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,7 +20,11 @@ public class UserService {
     }
 
     public List<UserDto> findUsers(UserFilter userFilter) {
-        System.out.println(userFilter.getFirstName());
+
+
+        if (userFilter.getEmail() != null) {
+            return userRepository.findUsersByEmailLike("%" + userFilter.getEmail() + "%").stream().map(UserDto::new).collect(Collectors.toList());
+        }
         if (userFilter.getFirstName() != null || userFilter.getLastName() != null) {
             return userRepository.findUserByNames("%" + userFilter.getFirstName() + "%" +
                     "%" + userFilter.getLastName() + "%").stream().map(UserDto::new).collect(Collectors.toList());
@@ -28,26 +32,18 @@ public class UserService {
         return userRepository.findAllList().stream().map(UserDto::new).collect(Collectors.toList());
     }
 
+    public UserDto findUser(UserPrincipal userPrincipal) {
+        return new UserDto(userPrincipal.getUser());
+    }
 
 
 
     @Transactional
-    public void banUser(UserBanRequest userBanRequest){
-        User user = userRepository.findByIdRequired(userBanRequest.getId());
-        user.setUserStatus(UserStatus.BANNED);
+    public void changeUserSettings(UserChangeSettingsRequest userChangeSettingsRequest) {
+        User user = userRepository.findByIdRequired(userChangeSettingsRequest.getId());
+        user.setUserStatus(userChangeSettingsRequest.getUserStatus());
+        user.setRole(userChangeSettingsRequest.getRole());
     }
 
-    @Transactional
-    public void unBanUser(UserBanRequest userBanRequest){
-        User user = userRepository.findByIdRequired(userBanRequest.getId());
-        user.setUserStatus(UserStatus.ACTIVE);
-    }
-
-
-    @Transactional
-    public void changeRoleUser(UserChangeRoleRequest userChangeRoleRequest){
-        User user = userRepository.findByIdRequired(userChangeRoleRequest.getId());
-        user.setRole(userChangeRoleRequest.getRole());
-    }
 
 }

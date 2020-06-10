@@ -6,7 +6,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import tk.tarajki.atum.user.User;
 import tk.tarajki.atum.user.UserService;
-import tk.tarajki.atum.utils.enums.UserStatus;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {

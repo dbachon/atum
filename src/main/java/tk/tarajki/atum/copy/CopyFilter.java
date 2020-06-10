@@ -3,6 +3,7 @@ package tk.tarajki.atum.copy;
 public class CopyFilter {
     private Long id;
     private String code;
+    private String title;
 
     public Long getId() {
         return id;
@@ -18,5 +19,13 @@ public class CopyFilter {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

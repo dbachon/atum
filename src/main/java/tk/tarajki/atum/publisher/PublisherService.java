@@ -26,6 +26,15 @@ public class PublisherService {
         return new PublisherDto(publisher);
     }
 
+
+    @Transactional
+    public void changePublisherSettings(PublisherSettingsRequest publisherSettingsRequest) {
+        Publisher publisher = publisherRepository.findByIdRequired(publisherSettingsRequest.getId());
+        publisher.setName(publisherSettingsRequest.getName());
+        publisher.setEmail(publisherSettingsRequest.getEmail());
+        publisher.setTelephone(publisherSettingsRequest.getTelephone());
+    }
+
     public List<PublisherDto>  findPublishers(PublisherFilter publisherFilter){
         if (publisherFilter.getName() != null) {
             return publisherRepository.findPublishersByNameLike("%" + publisherFilter.getName() + "%").stream().map(PublisherDto::new).collect(Collectors.toList());

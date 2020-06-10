@@ -1,16 +1,20 @@
 package tk.tarajki.atum.publisher;
 
-public class PublisherBookDto {
+
+public class PublisherSettingsRequest {
     private Long id;
     private String name;
     private String telephone;
     private String email;
 
-    public PublisherBookDto(Publisher publisher) {
-        this.id = publisher.getId();
-        this.name = publisher.getName();
-        this.telephone = publisher.getTelephone();
-        this.email = publisher.getEmail();
+    public PublisherSettingsRequest(Long id, String name, String telephone, String email) {
+        this.id = id;
+        this.name = name;
+        this.telephone = telephone;
+        this.email = email;
+    }
+
+    public PublisherSettingsRequest() {
     }
 
     public String getName() {

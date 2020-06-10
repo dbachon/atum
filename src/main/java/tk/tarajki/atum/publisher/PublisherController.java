@@ -25,4 +25,10 @@ public class PublisherController {
         return publisherService.findPublishers(publisherFilter);
     }
 
+    @PatchMapping
+    public void changePublisherSettings(@RequestBody PublisherSettingsRequest publisherSettingsRequest) {
+        publisherService.changePublisherSettings(publisherSettingsRequest);
+    }
+
+
 }

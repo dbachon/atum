@@ -1,12 +1,14 @@
 package tk.tarajki.atum.auth;
 
-public class UserInfoDto {
+public class AuthResponse {
     private String email;
     private String token;
+    private Role role;
 
-    public UserInfoDto(String email, String token) {
+    public AuthResponse(String email, String token, Role role) {
         this.email = email;
         this.token = token;
+        this.role = role;
     }
 
     public String getEmail() {
@@ -23,5 +25,13 @@ public class UserInfoDto {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
