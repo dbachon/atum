@@ -47,7 +47,6 @@ public class AuthService {
             role = Role.READER;
         }
 
-
         User user = new User(
                 registerRequest.getFirstName(),
                 registerRequest.getLastName(),
