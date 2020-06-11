@@ -10,5 +10,3 @@ spring:
     url: jdbc:mysql://localhost:3306/Dawid?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     username: Dawid
     password: kotnaplocie1
-
-  spring.datasource.url
